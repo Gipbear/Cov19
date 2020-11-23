@@ -64,7 +64,7 @@ def get_r1_data():
     for k, v in data:
         city.append(k)
         confirm.append(int(v))
-    return jsonify({'city':city,'confirm':confirm})
+    return jsonify({'city': city, 'confirm': confirm})
 
 
 if __name__ == '__main__':
