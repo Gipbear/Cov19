@@ -52,7 +52,7 @@ function get_l2_data() {
     $.ajax({
         url: '/l2',
         success: function (data) {
-            ec_left2_option.xAxis[0].data = data.day
+            ec_left2_option.xAxis.data = data.day
             ec_left2_option.series[0].data = data.confirm_add
             ec_left2_option.series[1].data = data.suspect_add
             ec_left2.setOption(ec_left2_option, true)
@@ -65,7 +65,7 @@ function get_r1_data() {
     $.ajax({
         url: '/r1',
         success: function (data) {
-            ec_right1_option.xAxis[0].data = data.city
+            ec_right1_option.xAxis.data = data.city
             ec_right1_option.series[0].data = data.confirm
             ec_right1.setOption(ec_right1_option, true)
         }, error: function (xhr, type, errorThrown) {
@@ -78,6 +78,7 @@ function get_r1_data() {
 // setInterval(get_c2_data, 1000)
 // setInterval(get_l1_data, 1000)
 // setInterval(get_l2_data, 1000)
+// setInterval(get_r1_data, 1000)
 get_time()
 get_c1_data()
 get_c2_data()
