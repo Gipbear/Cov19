@@ -12,6 +12,8 @@ let ec_left2_option = {
     // 鼠标停留提示框
     tooltip: {
         trigger: 'axis',
+        // confine: true, //设置tooltip不超出图表
+        transitionDuration: 0,
         axisPointer: {
             type: 'line',
             lineStyle: {

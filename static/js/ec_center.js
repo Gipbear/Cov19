@@ -11,7 +11,9 @@ let ec_center_option = {
     },
     // 工具栏
     tooltip: {
-        trigger: 'item'
+        trigger: 'item',
+        // confine: true, //设置tooltip不超出图表
+        transitionDuration: 0,
     },
     // 左侧小导航图标，图例
     visualMap: {

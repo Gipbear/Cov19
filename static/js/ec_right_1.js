@@ -18,6 +18,8 @@ ec_right1_option = {
     color: ['#3398DB'],
     tooltip: {
         trigger: 'axis',
+        // confine: true, //设置tooltip不超出图表
+        transitionDuration: 0,
         axisPointer: {
             type: 'shadow'
         }
