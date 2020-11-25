@@ -1,5 +1,6 @@
 import time
 
+import numpy as np
 import pymysql
 
 
@@ -110,5 +111,30 @@ def get_r1_data():
     return res
 
 
+def get_r2_data():
+    """返回热搜词频"""
+    sql = """
+    select content, hot from hotsearch order by id desc  limit 20;
+    """
+    res = query(sql)
+    return res
+
+
 if __name__ == '__main__':
-    print(get_c1_data())
+    res = get_c2_data()
+    data = []
+    res_num = []
+    per_num = [0]
+    per = []
+    for tup in res:
+        data.append({'name': tup[0], 'value': int(tup[1])})
+        res_num.append(int(tup[1]))
+    da = np.array(res_num)
+    per_num.append(np.percentile(da, 25))
+    per_num.append(np.median(da))
+    per_num.append(np.percentile(da, 75))
+    per_num.append(np.percentile(da, 95))
+    for i in range(len(per_num) - 1):
+        per.append({'start': per_num[i], 'end': per_num[i + 1]})
+    per.append({'start': per_num[-1]})
+    print(per)

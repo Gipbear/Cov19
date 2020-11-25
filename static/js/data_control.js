@@ -27,6 +27,7 @@ function get_c2_data() {
         url: '/c2',
         success: function (data) {
             ec_center_option.series[0].data = data.data
+            ec_center_option.visualMap.splitList = data.per
             ec_center.setOption(ec_center_option)
         }, error: function (xhr, type, errorThrown) {
         }
@@ -73,6 +74,17 @@ function get_r1_data() {
     });
 }
 
+function get_r2_data() {
+    $.ajax({
+        url: '/r2',
+        success: function (data) {
+            ec_right2_option.series[0].data = data.kws
+            ec_right2.setOption(ec_right2_option, true)
+        }, error: function (xhr, type, errorThrown) {
+        }
+    });
+}
+
 // setInterval(get_time, 1000)
 // setInterval(get_c1_data, 1000)
 // setInterval(get_c2_data, 1000)
@@ -85,3 +97,4 @@ get_c2_data()
 get_l1_data()
 get_l2_data()
 get_r1_data()
+get_r2_data()

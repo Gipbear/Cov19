@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import jsonify
 from flask import render_template
+from jieba.analyse import extract_tags
+import numpy as np
 
 import utils
 
@@ -25,11 +27,23 @@ def get_c1_data():
 
 @app.route('/c2')
 def get_c2_data():
-    res = []
-    for tup in utils.get_c2_data():
-        # print(tup)
-        res.append({'name': tup[0], 'value': int(tup[1])})
-    return jsonify({'data': res})
+    res = utils.get_c2_data()
+    data = []
+    res_num = []
+    per_num = [0]
+    per = []
+    for tup in res:
+        data.append({'name': tup[0], 'value': int(tup[1])})
+        res_num.append(int(tup[1]))
+    da = np.array(res_num)
+    per_num.append(np.percentile(da, 25))
+    per_num.append(np.median(da))
+    per_num.append(np.percentile(da, 75))
+    per_num.append(np.percentile(da, 95))
+    for i in range(len(per_num) - 1):
+        per.append({'start': per_num[i], 'end': per_num[i + 1]})
+    per.append({'start': per_num[-1]})
+    return jsonify({'data': data, 'per': per})
 
 
 @app.route('/l1')
@@ -65,6 +79,18 @@ def get_r1_data():
         city.append(k)
         confirm.append(int(v))
     return jsonify({'city': city, 'confirm': confirm})
+
+
+@app.route('/r2')
+def get_r2_data():
+    res = utils.get_r2_data()
+    d = []
+    for i, v in res:
+        ks = extract_tags(i)
+        for j in ks:
+            if not j.isdigit():
+                d.append({'name': j, 'value': v})
+    return jsonify({'kws': d})
 
 
 if __name__ == '__main__':

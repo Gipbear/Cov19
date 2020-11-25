@@ -1,13 +1,13 @@
 let ec_center = echarts.init(document.getElementById(('c2')), "dark");
-let my_data = [{'name': '上海', 'value': '318'}, {'name': '云南', 'value': '162'}];
+// let my_data = [{'name': '上海', 'value': '318'}, {'name': '云南', 'value': '162'}];
 
 let ec_center_option = {
     // backgroundColor: '#B2E0FF',  		// 图表背景色
 
     title: {
-        text: '',
+        text: '国内疫情地图',
         subtext: '',
-        x: 'left'
+        x: 'center'
     },
     // 工具栏
     tooltip: {
@@ -23,11 +23,11 @@ let ec_center_option = {
         textStyle: {
             fontSize: 8,
         },
-        splitList: [{start: 1, end: 9},
-            {start: 10, end: 99},
-            {start: 100, end: 999},
-            {start: 1000, end: 9999},
-            {start: 10000}],
+        splitList: [{'start': 1, 'end': 9},
+            {'start': 10, 'end': 99},
+            {'start': 100, 'end': 999},
+            {'start': 1000, 'end': 9999},
+            {'start': 10000}],
         color: ['#8A3310', '#C64918', '#F55825', '#F2AD92', '#F9DCD1']
     },
     // 配置属性
@@ -58,7 +58,7 @@ let ec_center_option = {
                 fontSize: 8,
             }
         },
-        data: my_data // 数据
+        data: [] // 数据
     }]
 };
 ec_center.setOption(ec_center_option)
